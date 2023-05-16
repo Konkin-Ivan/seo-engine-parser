@@ -1,4 +1,51 @@
-pre {
-  background: black;
+/* Стили для контейнера */
+.dd-container {
+  background-color: #252525;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
   color: #fff;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+/* Стили для заголовков */
+.dd-title {
+  color: #00bcd4;
+  font-size: 18px;
+  margin-top: 0;
+}
+
+/* Стили для содержимого */
+.dd-content {
+  margin-bottom: 0;
+}
+
+/* Стили для строк */
+.dd-string {
+  color: #f44336;
+}
+
+/* Стили для чисел */
+.dd-number {
+  color: #ff9800;
+}
+
+/* Стили для логических значений */
+.dd-bool {
+  color: #4caf50;
+}
+
+/* Стили для null-значений */
+.dd-null {
+  color: #9e9e9e;
+}
+
+/* Стили для массивов */
+.dd-array {
+  margin: 5px 0 0 20px;
+}
+
+/* Стили для объектов */
+.dd-object {
+  margin: 5px 0 0 20px;
 }
