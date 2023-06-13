@@ -15,33 +15,33 @@ namespace web\App\ParcelUrl;
 
 
 class ParcelUrl {
+    private $apiKey;
 
-    private $url;
-    private $response;
-    private $error = false;
-
-    public function __construct($url) {
-        $this->url = $url;
+    public function __construct($apiKey) {
+        $this->apiKey = $apiKey;
     }
 
-    public function fetch() {
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $this->url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36');
-        curl_setopt($curl, CURLOPT_REFERER, 'https://google.ru');
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU,ru;q=0.8;charset=UTF-8'));
-        $this->response = curl_exec($curl);
-        if ($this->response === false) {
-            $this->error = true;
-        }
-        curl_close($curl);
-        return $this->response;
-    }
+    // Метод для генерации карты сайта.
+    public function generateSitemap($siteUrl) {
+        $url = "https://api.mysitemapgenerator.com/v1/generate?url=" . urlencode($siteUrl);
 
-    public function isError() {
-        return $this->error;
-    }
+        $headers = array(
+            'Authorization: Basic ' . base64_encode($this->apiKey . ':'),
+        );
 
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+        //echo getcwd(); // покажет текущую директорию
+        //die();
+        $file = fopen("fff/sitemap.xml", "r");
+        fwrite($file, $response);
+        fclose($file);
+
+        return "Карта сайта успешно сгенерирована.";
+    }
 }

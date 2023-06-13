@@ -19,13 +19,11 @@
   use web\App\ParcelUrl\ParcelUrl;
   chdir(dirname(__DIR__));
   require_once "vendor/autoload.php";
-  $parser = new ParcelUrl('https://www.php.net/manual/ru/');
-  $response = $parser->fetch();
-  if ($parser->isError()) {
-      echo 'An error occurred while fetching data';
-  } else {
-      echo $response;
-  }
+  // Создание объекта MySitemapGenerator с ключом API.
+  $generator = new ParcelUrl('fff');
+
+  // Генерация карты сайта для сайта www.example.com.
+  echo $generator->generateSitemap('https://php.net');
 
   ?>
 </body>
